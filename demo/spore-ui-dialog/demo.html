@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no">
+<title>spore-ui-dialog</title>
+<link rel="stylesheet" href="http://mat1.gtimg.com/house/houseria/2017/lib/src/bootstrap.min.css">
+<style type="text/css">
+.list{
+	padding: 10px;
+	padding-bottom: 40px;
+}
+.list .item{
+	margin-bottom: 20px;
+}
+.list .tip{
+	margin-top: 5px;
+	font-size: 12px;
+	color: #999;
+}
+.list .tip::before{
+	content: 'tip:';
+	display: inline-block;
+	margin-right: 5px;
+}
+.p-qrbox{
+	position: relative;
+	margin: 30px 20px 10px;
+}
+.p-qrbox img{
+	display: block;
+	max-width: 300px;
+	width: 70%;
+	margin: 0 auto;
+}
+.p-qrbox a{
+	margin-top: 10px;
+	text-align: center;
+	display: block;
+	word-wrap: break-word;
+}
+</style>
+</head>
+<body>
+<div class="list">
+	<div class="group">
+		<h3>tip</h3>
+		<div class="item">
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="tip-parent">提示显示在指定区域</button>
+			<p class="tip">parentNode: $('.p-qrbox')</p>
+		</div>
+		<div class="item">
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="tip-simple">基本tip</button>
+			<p class="tip">最简版本</p>
+		</div>
+		<div class="item">
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="tip-long-text">显示一段长文本</button>
+			<p class="tip">显示长文本</p>
+		</div>
+		<div class="item">
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="tip-top">提示显示在上方</button>
+			<p class="tip">top:'20px'</p>
+		</div>
+		<div class="item">
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="tip-bottom">提示显示在下方</button>
+			<p class="tip">bottom:'20px'</p>
+		</div>
+	</div>
+</div>
+<script src="http://mat1.gtimg.com/house/houseria/2016/lib-zepto/js/v1/lib.js"></script>
+<script src="http://mat1.gtimg.com/house/houseria/2017/lib/src/qrious.min.js"></script>
+<script src="assets/showqr.js"></script>
+<script src="dist/spore-ui-dialog.js"></script>
+<script src="assets/demo.js"></script>
+</body>
+</html>
