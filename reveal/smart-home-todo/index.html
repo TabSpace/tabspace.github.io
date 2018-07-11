@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<title>智能家居填坑指南</title>
+
+<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+<meta name="author" content="Hakim El Hattab">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="stylesheet" href="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/css/reveal.css">
+<link rel="stylesheet" href="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/css/theme/black.css" id="theme">
+
+<!-- Theme used for syntax highlighting of code -->
+<link rel="stylesheet" href="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/lib/css/zenburn.css">
+
+<!-- Printing and PDF exports -->
+<script>
+var link = document.createElement( 'link' );
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/css/print/pdf.css' : 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/css/print/paper.css';
+document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<!--[if lt IE 9]>
+<script src="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/lib/js/html5shiv.js"></script>
+<![endif]-->
+
+<style>
+.tl{
+	text-align: left;
+}
+.reveal section .k-wimg{
+	width:100%;
+	height: auto;
+	max-height: initial;
+}
+</style>
+</head>
+
+<body>
+<div class="reveal">
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
+
+<section>
+	<h1>智能家居填坑指南</h1>
+	<h3>坑不平何以平天下</h3>
+	<p>
+		<small>智慧家居项目开发组 —— tabliang(梁栋)</small>
+	</p>
+</section>
+
+<section>
+	<h2>坑位指引</h2>
+</section>
+
+<section>
+	<h2>主要项目</h2>
+	<ul>
+		<li>样板间小程序</li>
+		<li>智家管理平台</li>
+		<li>3D样板间</li>
+	</ul>
+</section>
+
+<style>
+.p-sh-demo{
+	display: flex;
+	justify-content: space-around;
+
+}
+.p-sh-demo img{
+	width: 30%;
+	height: 30%;
+}
+</style>
+<section>
+	<h2>样板间小程序</h2>
+	<div class="p-sh-demo">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-home.jpeg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-device.jpeg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-scene.jpeg" />
+	</div>
+</section>
+
+<section>
+	<h2>样板间小程序</h2>
+	<ul>
+		<li>wepy 框架</li>
+		<li>框架坑</li>
+		<li>直播坑</li>
+		<li>界面坑</li>
+		<li>持续维护中</li>
+	</ul>
+</section>
+
+<section>
+	<h2>智家管理平台</h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-admin-home.png" />
+</section>
+
+<section>
+	<h2>智家管理平台</h2>
+	<ul>
+		<li>vue + element UI</li>
+		<li>流程坑</li>
+		<li>待业务重构</li>
+	</ul>
+</section>
+
+<section>
+	<h2>3D样板间</h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-example-3d.png" />
+</section>
+
+<section>
+	<h2>3D样板间</h2>
+	<ul>
+		<li>vue + babylonjs</li>
+		<li>性能坑</li>
+		<li>模型坑</li>
+		<li>待进一步研究</li>
+	</ul>
+</section>
+
+<section>
+	<h2>样板间小程序</h2>
+</section>
+
+<section>
+	<h2>wepy 框架问题<span style="color:green;">【已填】</span></h2>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-dev-tpl.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>wepy 框架问题</h2>
+	<ul>
+		<li>repeat, slot, watch 等特性都存在不少问题</li>
+		<li>代码高亮可用 vue 方案，但对事件绑定语法有影响(@tap => catchtap)</li>
+		<li>打包方案并不合理，会整包引入 node_module</li>
+		<li>目前推荐只用来做组件管理</li>
+		<li>目前版本 1.5.8，最新版本 1.7.X，有待升级后做进一步评测</li>
+		<li>另一个框架 mpvue 存在类似问题</li>
+	</ul>
+</section>
+
+<section>
+	<h2>通用模块设计<span style="color:green;">【已填】</span></h2>
+	<p>所有页面都要能够展示告警弹层，我们引入 common 组件</p>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-my-com.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-my.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>通用模块设计</h2>
+	<p>tip 实际是 mixin 上混入的方法</p>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-home-tip.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-mix-com.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>通用模块设计</h2>
+	<p>mixin 通过广播将数据传递给子组件</p>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-show-tip.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>应对接口变更<span style="color:green;">【已填】</span></h2>
+	<p>统一请求方式，简化业务逻辑呈现，特性统一包装</p>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-io-dev.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>配置cookie<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>需要实现统一的接口适配器</li>
+		<li>在 header 里面配置 cookie，可统一小程序接口与h5接口用户标志获取方式</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-io-req.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>配置cookie</h2>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-util-cookie.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>抽象业务逻辑<span style="color:green;">【已填】</span></h2>
+	<p>需要兼容小程序与h5的请求方式</p>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-model-store.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>抽象业务逻辑-TODO</h2>
+	<ul>
+		<li>如果接口稳定，兼容接口代码可以直接包装</li>
+		<li>websocket接入在这一层实现</li>
+		<li>简化数据处理，如环境检测器图表数据初始化</li>
+		<li>转换为SDK</li>
+		<li>添加文档与测试</li>
+	</ul>
+</section>
+
+<section>
+	<h2>获取用户信息<span style="color:green;">【已填】</span></h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-wx-getualert.png" />
+	<ul>
+		<li>需要获取昵称，微信uid，手机号</li>
+		<li>使用 wx.getUserInfo 接口直接弹出授权框的开发方式将逐步不再支持。</li>
+		<li>官方要求：使用 button 组件，并将 open-type 指定为 getUserInfo 类型，获取用户基本信息。</li>
+		<li>已授权，则可以继续使用 wx.getUserInfo 接口</li>
+		<li>未授权，必须呈现 button[open-type="getUserInfo"]</li>
+	</ul>
+</section>
+
+<section>
+	<h2>获取用户信息</h2>
+	<ul>
+		<li>方案：默认调用 wx.getUserInfo 接口</li>
+		<li>默认授权失败则显示授权按钮</li>
+	</ul>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-btn-auth.png" />
+</section>
+
+<section>
+	<h2>覆盖物<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>小程序部分组件使用原生客户端组件</li>
+		<li>这些组件具有最高层级</li>
+		<li>覆盖这些组件，可能存在兼容性问题</li>
+	</ul>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-canvas-zindex.png" class="k-wimg" />
+</section>
+
+<section>
+	<h2>覆盖物</h2>
+	<ul>
+		<li>目前业务中，有用到 video 组件呈现监控视频，用 canvas 呈现图表</li>
+		<li>浮层包括：房间选择浮层，告警浮层，信息提示浮层</li>
+		<li>目前的解决方案，是用广播通知 video, canvas 隐藏</li>
+	</ul>
+	<div style="height: 40vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-layer-show.png" style="width:50vw;" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-layer-video.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>覆盖物</h2>
+	<ul>
+		<li>cover-view 一早就有，但一直不完善</li>
+		<li>2018年1月16日发布1.9.0，对cover-view有改进，但当时实测还存在bug</li>
+		<li>需要再次验证其功能，提升基础库版来验证是否可彻底解决</li>
+	</ul>
+	<div style="height: 40vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-cover-view.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-mp-cv-tip.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>直播流接入<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>目前主要直播协议为 hls 与 rtmp</li>
+		<li>hls 支持面广泛，但延迟高，普遍在 10 秒以上，无法控制在 5 秒内</li>
+		<li>rtmp 是 adobe 私有协议，h5 端需要 flash 支持，小程序可直接播放</li>
+		<li>rtmp 直播延迟可控制在 1 秒内</li>
+		<li>腾讯云提供了对 rtmp 和 hls 的支持</li>
+	</ul>
+</section>
+
+<section>
+	<h2>直播流接入</h2>
+	<ul>
+		<li>小程序 video 组件默认支持 hls 直播</li>
+		<li>rtmp 实时直播需要启用 live-player 组件</li>
+		<li>启用 live-player 组件需要配置服务类目为 社交 &gt; 直播 </li>
+		<li>配置该类目需要 信息网络传播视听节目许可证</li>
+		<li>摄像头可提供推流器来向腾讯云推送 rtmp 上行流</li>
+		<li>通过腾讯云获取在线直播地址，需要后台开发介入</li>
+	</ul>
+</section>
+
+<section>
+	<h2>设备与房间切换<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>目前具体设备状态更新，经历一个较长的请求流程</li>
+		<li>house.load() =&gt; room.load() =&gt; device.refresh() =&gt; 渲染</li>
+		<li>需要完善模型层能力，提供更完善的缓存状态</li>
+	</ul>
+</section>
+
+<section>
+	<h2>业务状态同步<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>最早的设备状态并未存储在后台</li>
+		<li>后台接收设备状态更新消息，要等 5 秒</li>
+		<li>从 SPC 开始，一切状态以 SPC 为准</li>
+		<li>目前设备状态，靠用户操作触发，或者5秒轮询</li>
+		<li>应当切换为 websocket 方案</li>
+	</ul>
+</section>
+
+<section>
+	<h2>安全问题<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>房间二维码是静态的</li>
+		<li>用户房间授权时限很长</li>
+		<li>skey时效过长</li>
+	</ul>
+</section>
+
+<section>
+	<h2>智家管理平台</h2>
+</section>
+
+<section>
+	<h2>统一 loading 状态<span style="color:green;">【已填】</span></h2>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-am-set-prog.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>统一 loading 状态</h2>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-am-req-prog.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>广播白名单<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>全局广播虽然比 store 便捷，但是与全局变量一样存在维护隐患</li>
+		<li>以代码方式确保规模可控</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-am-bus-wl.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>线上调试日志<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>便于线上调试查询问题</li>
+		<li>起初目标：通过mixin植入，减少日志代码硬植入</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-am-log-mixin.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>线上调试日志</h2>
+	<p>解决大型框架调试麻烦的问题</p>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-am-log-fe.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>线上调试日志</h2>
+	<ul>
+		<li>后期思考：</li>
+		<li>还是应该硬植入，log质量重于数量</li>
+		<li>避开循环执行函数带来的日志陷阱</li>
+		<li>可进一步改进，实现远程日志收集</li>
+		<li>目前文件标记是每个模块提供一个路径属性</li>
+		<li>已知一个方案：路径变更为Vue注册模块名称</li>
+		<li>考虑结合 webpack 打包来解决日志路径自动配置问题</li>
+	</ul>
+</section>
+
+<section>
+	<h2>情景模式死循环<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>设备可以触发场景</li>
+		<li>场景可以添加设备操作</li>
+		<li>场景引用了触发另一个场景的设备</li>
+		<li>引发死循环（物理）</li>
+	</ul>
+</section>
+
+<section>
+	<h2>情景模式死循环</h2>
+	<ul>
+		<li>方案1：添加熔断，简单易行，但不够友好</li>
+		<li>方案2：场景创建时进行判断，可提早给予用户提示</li>
+		<li>每个场景记录触发设备，每个设备记录隶属场景</li>
+		<li>设备隶属的场景可能有多个，场景会关联多个设备</li>
+		<li>整个图的遍历可能会是一个高消耗操作</li>
+	</ul>
+</section>
+
+<section>
+	<h2>情景模式死循环</h2>
+	<ul>
+		<li>可以考虑创建场景记录上游设备列表</li>
+		<li>继承上游场景的上游设备列表</li>
+		<li>如关联设备与上游设备列表冲突，则拒绝关联</li>
+		<li>场景移除设备需要向下游更新场景链</li>
+		<li>总场景数量应予以控制</li>
+		<li>与熔断判断相结合</li>
+	</ul>
+</section>
+
+<section>
+	<h2>3D样板间</h2>
+</section>
+
+<section>
+	<h2>模型配置化<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>场景关联数据庞杂且多变</li>
+		<li>未开发场景编辑器，手动配置数据来解决</li>
+		<li><a href="https://config-1252004079.file.myqcloud.com/2017/smart-home-3d/house/10009_10036.json" target="_blank">配置数据范例</a></li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-mock-model.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>模型配置化</h2>
+	<ul>
+		<li>3d场景初始化消耗时间长</li>
+		<li>期望配置数据更新，触发自动刷新场景</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-dev-server.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-dev-client.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>渲染流程结构化<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>页面刷新缓慢，需避免开发中页面频繁刷新</li>
+		<li>结合 vue 组件生命周期，解决3d组件渲染更新问题</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-house-tree.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>渲染流程结构化</h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-wall-life.png" class="k-wimg" />
+</section>
+
+<section>
+	<h2>渲染流程结构化</h2>
+	<div style="height: 70vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-house-tpl.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-house-wall.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>渲染流程结构化</h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-vue-mod.gif" />
+</section>
+
+<section>
+	<h2>渲染性能优化<span style="color:green;">【已填】</span></h2>
+	<div style="height: 70vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-wall-performance.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>渲染性能优化</h2>
+	<ul>
+		<li>减少 mesh 的构建，用 clone 与镜像替代重复构建 mesh</li>
+		<li>构建合并 mesh ，导入整体优于分开创建</li>
+		<li>阴影消耗资源较多，且框架存在 bug</li>
+		<li>物理引擎是性能杀手，慎用物理引擎与碰撞检测</li>
+		<li>减少照射同一物体的光源数量，减少光效叠加，控制光源影响的 mesh  数量</li>
+	</ul>
+</section>
+
+<section>
+	<h2>设备选取<span style="color:green;">【已填】</span></h2>
+	<ul>
+		<li>每个 mesh 都要配置名称</li>
+		<li>观察者模式配置事件绑定</li>
+	</ul>
+	<div style="height: 50vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-get-picker.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>设备选取</h2>
+	<div style="height: 70vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-util-gp.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>手势适配<span style="color:green;">【已填】</span></h2>
+	<p>对于 babylonjs, 支持手势操作只是一句话的事情</p>
+	<div style="height: 60vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-main-hand.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>手势适配</h2>
+	<ul>
+		<li>然而web开发最坑人的地方，就是兼容性总能出幺蛾子</li>
+		<li>IOS 11.3 起，默认事件绑定选项都是 {passive: true}</li>
+		<li>传统的阻止 touchmove 事件的方法全挂了</li>
+		<li>更新方案后，多次操作，依然会触发页面滚动</li>
+		<li>还好小程序 webview 和微信用的是 X5 内核</li>
+	</ul>
+</section>
+
+<section>
+	<h2>手势适配</h2>
+	<div style="height: 70vh; overflow: auto;">
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-tm-pev.png" class="k-wimg" />
+		<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-ev-passive.png" class="k-wimg" />
+	</div>
+</section>
+
+<section>
+	<h2>模型精细化<span style="color:red;">【未填】</span></h2>
+	<p>是的，这个就是灯</p>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-model-light.png"/>
+</section>
+
+<section>
+	<h2>模型精细化</h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-play-canvas.gif"/>
+</section>
+
+<section>
+	<h2>模型精细化</h2>
+	<ul>
+		<li><a href="https://playcanv.as/p/JtL2iqIH/" target="_blank">示例地址</a></li>
+		<li>精细化并不是说一定要做的多么逼真</li>
+		<li>目标是在艺术感和性能之间找到一个平衡</li>
+	</ul>
+</section>
+
+<section>
+	<h2>场景拉取<span style="color:red;">【未填】</span></h2>
+	<img src="https://ria-1252004079.file.myqcloud.com/2018/reveal-smart-home/static/images/sh-3d-mesh-scene.gif"/>
+</section>
+
+<section>
+	<h2>场景拉取</h2>
+	<ul>
+		<li><a href="http://www.babylonjs.com/demos/glowingespilit/" target="_blank">示例地址</a></li>
+		<li>整个场景作为一个 mesh 拉入可大幅度提升性能与体验</li>
+		<li>模型文件会比较大，动辄数十MB</li>
+		<li>刚才的场景 50MB</li>
+		<li>对 CPU 有较高消耗，长期浏览该场景，MBP 风扇狂转</li>
+		<li>可分离部分 mesh 供 js 操作</li>
+		<li>可以考虑本地缓存场景与模型文件</li>
+	</ul>
+</section>
+
+<section>
+	<h2>光影重叠<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>同一物体可照射光源默认仅支持6个</li>
+		<li>环境光，地面光就占了2个</li>
+		<li>提高光源支持数量，会大幅牺牲性能</li>
+		<li>通过指定光源可照射 mesh ，可节约光源数量</li>
+		<li>影子呈现存在 bug，背后物体被照亮</li>
+		<li>如何用贴图模拟光影效果，是个大学问</li>
+	</ul>
+</section>
+
+<section>
+	<h2>场景编辑器<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>从平面图到房间模型，需要设计操作流程</li>
+		<li>标准化模型构建与导出流程</li>
+		<li>支持物件导入，物件更新</li>
+		<li>支持物件多种状态的配置</li>
+		<li>绑定现有设备</li>
+	</ul>
+</section>
+
+<section>
+	<h2>控制方式<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>传统移动端操作并不顺畅</li>
+		<li>物体点击缺乏高亮指示</li>
+		<li>交互方式有别于传统h5</li>
+	</ul>
+</section>
+
+<section>
+	<h2>移动端性能<span style="color:red;">【未填】</span></h2>
+	<ul>
+		<li>iPhone7: 60 fps</li>
+		<li>iPhone6: 30 fps</li>
+		<li>HW-M9 原生不兼容</li>
+		<li>HW-M9 mm/qq: 15 fps</li>
+		<li>HW-M9 uc/chrome: 50 fps</li>
+		<li>windows chrome: 60 fps</li>
+		<li>优先考虑 windows 大屏场景</li>
+	</ul>
+</section>
+
+<section>
+	<h2>思考与总结</h2>
+</section>
+
+<section>
+	<h2>样板间小程序</h2>
+	<ul>
+		<li>需要解决持续迭代变更问题</li>
+		<li>需要完善模型交互，提取SDK</li>
+		<li>需要完善测试</li>
+		<li>重点在持续改进用户体验</li>
+	</ul>
+</section>
+
+<section>
+	<h2>智家管理平台</h2>
+	<ul>
+		<li>前端交互上不存在复杂的坑</li>
+		<li>主要问题会出在产品逻辑上</li>
+		<li>设备联网与部署麻烦，需要解决方案</li>
+		<li>重点在解决适应性，健壮性</li>
+	</ul>
+</section>
+
+<section>
+	<h2>3D样板间</h2>
+	<ul>
+		<li>坑最多，也最复杂</li>
+		<li>需要更长时间投入人力踏实技术基础</li>
+		<li>兼容性问题交给市场与时间</li>
+		<li>持续迭代，寻找适合的使用场景</li>
+		<li>未来潜力最大，可形成技术差距</li>
+		<li>重点在探索实用价值，寻找性能体验平衡点</li>
+	</ul>
+</section>
+
+<section>
+	<h1>THANKS</h1>
+</section>
+
+</div>
+</div>
+
+<script src="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/lib/js/head.min.js"></script>
+<script src="https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/js/reveal.js"></script>
+
+<script>
+// More info https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+	controls: true,
+	progress: true,
+	history: true,
+	center: true,
+
+	// 分享进度设置，下面设置了15分钟
+	allottedTime: 40 * 60 * 1000,
+
+	transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+	// More info https://github.com/hakimel/reveal.js#dependencies
+	dependencies: [
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/zoom-js/zoom.js', async: true },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/notes/notes.js', async: true },
+		{ src: 'https://ria-1252004079.file.myqcloud.com/demo/reveal/assets/plugin/elapsed-time-bar/elapsed-time-bar.js'}
+	]
+});
+</script>
+
+</body>
+</html>
