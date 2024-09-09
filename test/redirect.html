@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>redirect</title>
+<style>
+.v-button{
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+<div class="v-button">点击跳转</div>
+<script>
+(function() {
+  var queryCache = {};
+  function $getQuery (url, name) {
+    var query = queryCache[url] || {};
+
+    if (url) {
+      var searchIndex = url.indexOf('?');
+      if (searchIndex >= 0) {
+        var search = url.slice(searchIndex + 1, url.length);
+        search = search.replace(/#.*/, '');
+
+        var params = search.split('&')
+        params.forEach(function (group) {
+          var equalIndex = group.indexOf('=')
+          if (equalIndex > 0) {
+            var key = group.slice(0, equalIndex);
+            var value = group.slice(equalIndex + 1, group.length);
+            query[key] = value;
+          }
+        })
+      }
+      queryCache[url] = query;
+    }
+
+    if (!name) {
+      return query;
+    } else {
+      return query[name] || '';
+    }
+  }
+
+  var button = document.querySelector('.v-button');
+  button.addEventListener('click', function() {
+    var url = $getQuery(location.href, 'url');
+    url = decodeURIComponent(url);
+    window.location.href = url;
+  }, false);
+})();
+</script>
+</body>
+</html>
